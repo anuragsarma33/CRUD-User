@@ -59,6 +59,10 @@ function User() {
     }
   };
 
+  const goBack = () => {
+      navigate('/users');
+  }
+
   return (
     <>
       {loading ? (
@@ -71,6 +75,7 @@ function User() {
                 <Alert.Heading className="text-center">{message}</Alert.Heading>
               </Alert>
             )}
+            <div className="close pointer" onClick={goBack} />
             <h3 className="text-center">Update User</h3>
             <div className="user-info">
               <form>
