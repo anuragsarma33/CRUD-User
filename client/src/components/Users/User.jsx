@@ -14,6 +14,7 @@ function User() {
   const [email, setEmail] = useState(user?.email);
   const [message, setMessage] = useState("");
   const [disable, setDisable] = useState(true);
+  const [type, setType] = useState("default");
 
   useEffect(() => {
     getUserById();
@@ -42,30 +43,35 @@ function User() {
         data: { ...user, email },
       });
       if (resp.status === 200) {
+        setType("success");
         setMessage("User updated successfully");
         setTimeout(() => {
           navigate("/users");
         }, 1000);
       }
     } catch (e) {
-      console.log(e);
+      setMessage("This email is already in use");
+      setType("danger");
+      setTimeout(() => {
+        setMessage("");
+        setType("default");
+      }, 3000);
     }
   };
 
   return (
     <>
-      {message && (
-        <Alert variant="success">
-          <Alert.Heading>{message}</Alert.Heading>
-        </Alert>
-      )}
       {loading ? (
         <Spinner />
       ) : (
         <div className="d-flex justify-content-center align-items-center h-100vh flex-direction-column">
           <div className="user-card">
-            <h1>Update User</h1>
-
+            {message && (
+              <Alert variant={type}>
+                <Alert.Heading className="text-center">{message}</Alert.Heading>
+              </Alert>
+            )}
+            <h3 className="text-center">Update User</h3>
             <div className="user-info">
               <form>
                 <div className="mb-3">

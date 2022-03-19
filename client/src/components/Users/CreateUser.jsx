@@ -50,7 +50,7 @@ const CreateUser = () => {
       <div className="d-flex justify-content-center align-items-center h-100vh flex-direction-column">
         {message && (
           <Alert variant={type}>
-            <Alert.Heading>{message}</Alert.Heading>
+            <Alert.Heading className="text-center">{message}</Alert.Heading>
           </Alert>
         )}
         <div className="user-card">
